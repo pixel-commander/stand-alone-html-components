@@ -1,3 +1,27 @@
+const PANEL_TEMPLATE = document.createElement('template');
+PANEL_TEMPLATE.innerHTML = `
+<div class="machine-overview-grid">
+  <div data-area="icon"><img alt=""></div>
+  <header data-area="header">
+    <div class="title"></div>
+    <div class="value"></div>
+  </header>
+  <div data-area="spacer"></div>
+  <div data-area="main" class="machine-overview-details">
+    <div class="cell name heading"></div>
+    <div class="cell target heading">Target</div>
+    <div class="cell actual heading">Actual Value</div>
+  </div>
+</div>
+`;
+
+const ROW_TEMPLATE = document.createElement('template');
+ROW_TEMPLATE.innerHTML = `
+<div class="cell name"></div>
+<div class="cell target"></div>
+<div class="cell actual"></div>
+`;
+
 class MachineOverviewGrid extends HTMLElement {
   #data = [];
   #icon = '';
@@ -6,7 +30,6 @@ class MachineOverviewGrid extends HTMLElement {
   #value = '';
 
   connectedCallback() {
-    this.classList.add('machine-overview-grid');
     this.render();
   }
 
@@ -56,51 +79,29 @@ class MachineOverviewGrid extends HTMLElement {
   }
 
   render() {
-    const icon = document.createElement('div');
-    icon.dataset.area = 'icon';
+    const panel = PANEL_TEMPLATE.content.cloneNode(true);
+
+    const icon = panel.querySelector('[data-area="icon"]');
     if (this.#color) icon.style.background = this.#color;
 
-    if (this.#icon) {
-      const mark = document.createElement('img');
-      mark.src = this.#icon;
-      mark.alt = '';
-      icon.append(mark);
-    }
+    const mark = panel.querySelector('[data-area="icon"] img');
+    if (this.#icon) mark.src = this.#icon;
+    else mark.remove();
 
-    const header = document.createElement('header');
-    header.dataset.area = 'header';
+    panel.querySelector('.title').textContent = this.#title;
+    panel.querySelector('.value').textContent = this.#value;
 
-    const title = document.createElement('div');
-    title.classList.add('title');
-    title.textContent = this.#title;
-
-    const value = document.createElement('div');
-    value.classList.add('value');
-    value.textContent = this.#value;
-
-    header.append(title, value);
-
-    const spacer = document.createElement('div');
-    spacer.dataset.area = 'spacer';
-
-    const main = document.createElement('div');
-    main.dataset.area = 'main';
-    main.classList.add('machine-overview-details');
-
-    const appendCell = (text) => {
-      const cell = document.createElement('div');
-      cell.classList.add('cell');
-      cell.textContent = text;
-      main.append(cell);
-    };
-
-    ['', 'Target', 'Actual Value'].forEach(appendCell);
+    const main = panel.querySelector('[data-area="main"]');
 
     this.#data.forEach((row) => {
-      [row.name, row.target, row.actual].forEach(appendCell);
+      const cells = ROW_TEMPLATE.content.cloneNode(true);
+      cells.querySelector('.name').textContent = row.name;
+      cells.querySelector('.target').textContent = row.target;
+      cells.querySelector('.actual').textContent = row.actual;
+      main.append(cells);
     });
 
-    this.replaceChildren(icon, header, spacer, main);
+    this.replaceChildren(panel);
   }
 }
 

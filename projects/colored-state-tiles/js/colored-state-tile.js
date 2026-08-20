@@ -1,3 +1,11 @@
+const TILE_TEMPLATE = document.createElement('template');
+TILE_TEMPLATE.innerHTML = `
+<div class="colored-state-tile">
+  <div class="title"></div>
+  <div class="label"></div>
+</div>
+`;
+
 class ColoredStateTile extends HTMLElement {
   #title = '';
   #value = '';
@@ -5,7 +13,6 @@ class ColoredStateTile extends HTMLElement {
   #color = '';
 
   connectedCallback() {
-    this.classList.add('colored-state-tile');
     this.render();
   }
 
@@ -46,16 +53,15 @@ class ColoredStateTile extends HTMLElement {
   }
 
   render() {
-    const title = document.createElement('div');
-    title.classList.add('title');
+    const tile = TILE_TEMPLATE.content.cloneNode(true);
+
+    const title = tile.querySelector('.title');
     if (this.#color) title.style.color = this.#color;
     title.textContent = this.#title + ' (' + this.#value + ')';
 
-    const label = document.createElement('div');
-    label.classList.add('label');
-    label.textContent = this.#label;
+    tile.querySelector('.label').textContent = this.#label;
 
-    this.replaceChildren(title, label);
+    this.replaceChildren(tile);
   }
 }
 

@@ -1,4 +1,4 @@
-machine-overview-grid {
+.machine-overview-grid {
   display: grid;
   grid-template-columns: 30px 1fr;
   grid-template-rows: auto 1fr;
@@ -11,12 +11,12 @@ machine-overview-grid {
   box-sizing: border-box;
 }
 
-machine-overview-grid > [data-area="icon"]   { grid-area: icon; }
-machine-overview-grid > [data-area="header"] { grid-area: header; }
-machine-overview-grid > [data-area="spacer"] { grid-area: spacer; }
-machine-overview-grid > [data-area="main"]   { grid-area: main; }
+.machine-overview-grid > [data-area="icon"]   { grid-area: icon; }
+.machine-overview-grid > [data-area="header"] { grid-area: header; }
+.machine-overview-grid > [data-area="spacer"] { grid-area: spacer; }
+.machine-overview-grid > [data-area="main"]   { grid-area: main; }
 
-machine-overview-grid > [data-area="icon"] {
+.machine-overview-grid > [data-area="icon"] {
   display: grid;
   place-items: center;
   width: 30px;
@@ -25,18 +25,18 @@ machine-overview-grid > [data-area="icon"] {
   background: #005eb8;
 }
 
-machine-overview-grid > [data-area="icon"] img {
+.machine-overview-grid > [data-area="icon"] img {
   display: block;
   width: 18px;
   height: 18px;
 }
 
-machine-overview-grid .value {
+.machine-overview-grid .value {
   font-size: 18px;
   font-weight: 600;
 }
 
-machine-overview-grid > header {
+.machine-overview-grid > header {
   display: grid;
   grid-template-columns: 1fr auto;
   align-items: end;
@@ -45,7 +45,7 @@ machine-overview-grid > header {
   font-weight: 600;
 }
 
-machine-overview-grid > header .title {
+.machine-overview-grid > header .title {
     transform: translateY(20%);
 }
 
@@ -61,21 +61,18 @@ machine-overview-grid > header .title {
   text-align: center;
 }
 
-.machine-overview-details .cell:nth-child(3n+1) {
+.machine-overview-details .name {
   padding-left: 0;
   text-align: left;
 }
 
-.machine-overview-details .cell:nth-child(3n) {
+.machine-overview-details .actual {
   padding-right: 0;
   text-align: right;
-}
-
-.machine-overview-details .cell:nth-child(3n) {
   font-weight: 600;
 }
 
-.machine-overview-details .cell:nth-child(-n+3) {
+.machine-overview-details .heading {
   color: #6f7276;
   font-size: 12px;
   font-weight: 400;

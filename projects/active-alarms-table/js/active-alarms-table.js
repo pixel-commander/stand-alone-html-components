@@ -1,3 +1,23 @@
+const LIST_TEMPLATE = document.createElement('template');
+LIST_TEMPLATE.innerHTML = `
+<div class="active-alarms-table">
+  <ul class="inner"></ul>
+</div>
+`;
+
+const ALARM_TEMPLATE = document.createElement('template');
+ALARM_TEMPLATE.innerHTML = `
+<li>
+  <img class="icon" alt="">
+  <div class="date"></div>
+  <a class="link" href="#"></a>
+  <div class="break"></div>
+  <div class="id"></div>
+  <div class="details"></div>
+  <div class="spacer"></div>
+</li>
+`;
+
 class ActiveAlarmsTable extends HTMLElement {
   #data = [];
   #handleClick = null;
@@ -5,7 +25,6 @@ class ActiveAlarmsTable extends HTMLElement {
   #link_text = 'Open Issue';
 
   connectedCallback() {
-    this.classList.add('active-alarms-table');
     this.render();
   }
 
@@ -46,57 +65,32 @@ class ActiveAlarmsTable extends HTMLElement {
   }
 
   render() {
-    const inner = document.createElement('ul');
-    inner.classList.add('inner');
+    const list = LIST_TEMPLATE.content.cloneNode(true);
+    const inner = list.querySelector('.inner');
 
     this.#data.forEach((row) => {
-      const item = document.createElement('li');
+      const alarm = ALARM_TEMPLATE.content.cloneNode(true);
 
-      const icon = document.createElement('img');
-      icon.classList.add('icon');
-      icon.src = this.#Icon;
-      icon.alt = '';
-      item.append(icon);
+      alarm.querySelector('.icon').src = this.#Icon;
+      alarm.querySelector('.date').textContent = row.date;
+      alarm.querySelector('.id').textContent = row.id || '';
+      alarm.querySelector('.details').textContent = row.description;
 
-      const date = document.createElement('div');
-      date.classList.add('date');
-      date.textContent = row.date;
-      item.append(date);
-
+      const link = alarm.querySelector('.link');
       if (this.#handleClick) {
-        const link = document.createElement('a');
-        link.classList.add('link');
-        link.href = '#';
         link.textContent = this.#link_text;
         link.addEventListener('click', (event) => {
           event.preventDefault();
           this.#handleClick(row);
         });
-        item.append(link);
+      } else {
+        link.remove();
       }
 
-      const brk = document.createElement('div');
-      brk.classList.add('break');
-      item.append(brk);
-
-      const id = document.createElement('div');
-      id.classList.add('id');
-      id.textContent = row.id || '';
-      item.append(id);
-
-      const details = document.createElement('div');
-      details.classList.add('details');
-      details.textContent = row.description;
-      item.append(details);
-
-      const spacer = document.createElement('div');
-      spacer.classList.add('spacer');
-      item.append(spacer);
-
-      inner.append(item);
+      inner.append(alarm);
     });
 
-    this.replaceChildren(inner);
+    this.replaceChildren(list);
   }
 }
 

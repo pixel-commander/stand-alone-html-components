@@ -19,16 +19,32 @@ Files and folders
     [root]/__shared/css/theme.css           colors
     [root]/__shared/css/grid.css            layout
     [root]/__shared/css/page.css            the shell's chrome
-    [root]/__shared/js/
+    [root]/__shared/css/demo.css
     [root]/__shared/components/<name>/      a shared component, css and js
+
     [root]/__shared/__template/             starting point for a new project
+    [root]/__shared/__template/README.txt   the stamp
     [root]/__shared/__template/index.html
     [root]/__shared/__template/css/style.css
+    [root]/__shared/__template/css/project.css
+    [root]/__shared/__template/js/component.js
     [root]/__shared/__template/js/script.js
+
+    [root]/__shared/automation/             the scripts that run the stamp
+    [root]/__shared/automation/add-new-project/add-new-project.mjs
+    [root]/__shared/automation/add-new-project/README.txt
+    [root]/__shared/automation/ship-new-project/ship-new-project.mjs
+    [root]/__shared/automation/ship-new-project/README.txt
+
+    [root]/__shared/docs/<name>/README.txt  a process, described
 
     [root]/projects/
     [root]/projects/<name>/                 one component
     [root]/projects/<name>/index.html       what the loader puts in the iframe
+
+    [root]/shipped/
+    [root]/shipped/<name>/                  one component, converted
+    [root]/shipped/<name>/<name>.zip        the same folder, packed
 
 
 From the loader
@@ -57,4 +73,49 @@ from the shared area, and nothing there is meant for it.
 Paths within a project are relative to the project folder itself:
 
     css/style.css
+    css/project.css
+    js/<name>.js
     js/script.js
+
+A project that carries assets keeps them beside the rest:
+
+    icons/<name>.svg
+
+
+From the automation
+-------------------
+
+Both scripts sit two levels inside the shared area and reach [root] from
+there. They are run from anywhere, by path:
+
+    node __shared/automation/add-new-project/add-new-project.mjs <name>
+    node __shared/automation/ship-new-project/ship-new-project.mjs <name>
+
+add-new-project reads the template and writes a project:
+
+    __shared/__template/               read
+    projects/<name>/                   written
+    index.html                         the array in the shell, appended to
+
+ship-new-project reads a project and writes a shipped folder:
+
+    projects/<name>/js/<name>.js       read
+    projects/<name>/css/project.css    read
+    projects/<name>/README.txt         read when there is one
+    projects/<name>/icons/             read when there is one
+    shipped/<name>/                    written
+
+
+From inside a shipped folder
+----------------------------
+
+A shipped component is unpacked into a components folder somewhere else, so
+everything it names is relative to itself:
+
+    <name>.tsx
+    styles.css
+    README.txt
+    icons/<name>.svg
+
+The stylesheet is named the same in every shipped folder, so the import
+inside the component is the same line every time.

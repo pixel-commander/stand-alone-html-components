@@ -1,0 +1,117 @@
+/* grid — layout atom (the canonical ui-grid, sans the ui- prefix: base is .grid).
+   Usage:  <div className="grid side-l"> … </div>
+   Place children into named areas with data-area:
+           <div data-area="main"> … </div>
+   Class-based throughout so it works on a plain <div class="grid …">. */
+
+.grid { display: grid; }
+[data-area] { display: grid;}
+/* ── sidebar layouts ───────────────────────────────────────── */
+.grid.side-l {
+  grid-template-columns: auto 1fr;
+  grid-template-areas: "side main";
+}
+.grid.side-r {
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "main side";
+}
+
+.grid.sides {
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas: 'left main right';
+}
+/* ── header / footer layouts ───────────────────────────────── */
+.grid.with-header {
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "header"
+    "main";
+}
+.grid.with-footer {
+  grid-template-rows: 1fr auto;
+  grid-template-areas:
+    "main"
+    "footer";
+}
+.grid.with-header.with-footer {
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
+}
+
+/* ── full page layout ──────────────────────────────────────── */
+.grid.holy-grail {
+  grid-template-rows: auto 1fr auto;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas:
+    "header header header"
+    "left   main   right"
+    "footer footer footer";
+}
+
+/* a grid that SCROLLS packs its rows at the top: stretching auto rows to fill a fixed height is
+   what a scroller is trying to escape — three stacked widgets each want their own height, and the
+   cell moves instead. (No new class: .scroll-y is the mark theme.css and drag-scroll already read.) */
+.grid.scroll-y,
+.grid.scroll { align-content: start; grid-auto-rows: max-content; }
+
+/* ── gap atoms ─────────────────────────────────────────────── */
+/* the gap between cells, one step tighter than the padding ladder — a grid reads as ONE part with a
+   seam in it, not as loose panels. gap-md was in use before these existed, so those grids had none. */
+.gap-xs { gap:var(--padding-3xs); }
+.gap-sm { gap:var(--padding-2xs); }
+.gap { gap:var(--padding-xs); }
+.gap-md { gap:var(--padding-sm); }
+.gap-lg { gap:var(--padding-base); }
+.gap-xl { gap:var(--padding-md); }
+
+/* ── padding atoms ─────────────────────────────────────────── */
+/* a cell that needs breathing room without a container: the same three steps every surface uses. */
+.pad-sm { padding:var(--padding-sm); }
+.pad { padding:var(--padding-md); }
+.pad-lg { padding:var(--padding-2xl); }
+
+/* ── child → area placement ────────────────────────────────── */
+.grid > [data-area="header"] { grid-area: header; }
+.grid > [data-area="left"]   { grid-area: left; }
+.grid > [data-area="main"]   { grid-area: main; }
+.grid > [data-area="right"]  { grid-area: right; }
+.grid > [data-area="footer"] { grid-area: footer; }
+.grid > [data-area="side"]   { grid-area: side; }
+
+/* the load-bearing minimums: a grid item's default minimum is its content, so one long unbroken
+   string makes a column refuse to shrink. Zeroing lets the track win; header and footer are
+   auto-height rows and do not need it. */
+.grid > [data-area="main"], .grid > [data-area="side"], .grid > [data-area="left"], .grid > [data-area="right"] { min-width: 0; min-height: 0; }
+
+/* full — the span-everything word: a cell that takes the whole row of WHATEVER grid it sits in
+   (a custom Header across a head, a wide detail field, an empty state across a table). One rule,
+   kit-wide, so components stop inventing private "wide"/"has-x" spans. */
+.full { grid-column: 1 / -1; }
+
+/* inherit — a child that wears its PARENT's COLUMNS. For the scroller that has to sit inside a
+   grid without breaking it: the parent states the column shape once, the scroller repeats it, and
+   the two line up. Rows are NOT inherited — the parent clamps one row to hand the scroller a
+   bounded height, while the scroller lays its own rows out inside that. */
+.grid.inherit { grid-template-columns: inherit; grid-auto-rows: inherit; grid-auto-flow: inherit; }
+
+.grid-col-resize{display:grid;grid-template-columns:var(--left-w,16rem) minmax(0,1fr) var(--right-w,20rem);
+  grid-template-areas:"left main right";gap:var(--padding-lg);min-height:0;min-width:0;position:relative}
+.grid-col-resize[data-rails="left"]{grid-template-columns:var(--left-w,16rem) minmax(0,1fr);grid-template-areas:"left main"}
+.grid-col-resize[data-rails="right"]{grid-template-columns:minmax(0,1fr) var(--right-w,20rem);grid-template-areas:"main right"}
+.grid-col-resize[data-rails="none"]{grid-template-columns:minmax(0,1fr);grid-template-areas:"main"}
+
+.grid-col-resize > [data-area]{min-width:0;min-height:0;overflow:hidden;display:grid}
+.grid-col-resize > [data-area="main"]{overflow:auto}
+
+.grid-col-resize__grip{position:absolute;top:0;bottom:0;width:.75rem;z-index:6;cursor:col-resize;
+  display:grid;place-content:center;touch-action:none}
+.grid-col-resize__grip::after{content:"";width:2px;height:2.5rem;border-radius:1px;background:var(--color-text-faint);
+  transition:background .14s ease,height .14s ease}
+.grid-col-resize__grip:hover::after,.grid-col-resize[data-dragging="left"] .grid-col-resize__grip--left::after,
+.grid-col-resize[data-dragging="right"] .grid-col-resize__grip--right::after{background:rgb(var(--a));height:5rem}
+.grid-col-resize__grip--left{left:calc(var(--left-w,16rem) + .0625rem)}
+.grid-col-resize__grip--right{right:calc(var(--right-w,20rem) + .0625rem)}
+.grid-col-resize[data-dragging]{user-select:none}

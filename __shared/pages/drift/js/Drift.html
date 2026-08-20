@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Drift — soft workspace</title>
+<link rel="stylesheet" href="../../../theme/theme.css">
+<link rel="stylesheet" href="../../../theme/soft-light.css">
+<link rel="stylesheet" href="../../../theme/soft-dark.css">
+<link rel="stylesheet" href="../../../css/grid.css">
+<link rel="stylesheet" href="../../../atoms/imports.css">
+<link rel="stylesheet" href="../../../elements/imports.css">
+<link rel="stylesheet" href="../../../components/imports.css">
+<link rel="stylesheet" href="../css/drift.css">
+</head>
+<body class="theme-soft-dark no-overflow container-grain fixed">
+
+<div class="container-raised drift grid">
+  <div class="container-sunken drift-well grid side-l">
+
+    <aside class="drift-side grid with-footer" data-area="side">
+      <div class="drift-side-main grid" data-area="main">
+        <div class="site-nav-brand grid">
+          <span class="container-raised site-nav-mark tight square"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 15c4-9 12-9 16 0"/><circle cx="12" cy="15" r="2.4"/></svg></span>
+          <div>
+            <span class="site-nav-name">Drift</span>
+            <span class="site-nav-note">Studio workspace</span>
+          </div>
+        </div>
+        <nav class="site-nav grid" aria-label="Sections">
+        <button class="button-main site-nav-item quiet square grid is-active" data-nav="today"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span>Today</span><span class="site-nav-count">6</span></button>
+        <button class="button-main site-nav-item quiet square grid" data-nav="planned"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M8 3v4M16 3v4M3 10h18"/></svg><span>Planned</span><span class="site-nav-count">14</span></button>
+        <button class="button-main site-nav-item quiet square grid" data-nav="projects"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h6l2 2h10v9a2 2 0 0 1-2 2H3z"/></svg><span>Projects</span><span class="site-nav-count">4</span></button>
+        <button class="button-main site-nav-item quiet square grid" data-nav="someday"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13a8 8 0 1 1-9-9 6 6 0 0 0 9 9z"/></svg><span>Someday</span><span class="site-nav-count"></span></button>
+        <button class="button-main site-nav-item quiet square grid" data-nav="logbook"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg><span>Logbook</span><span class="site-nav-count"></span></button>
+        </nav>
+      </div>
+      <div class="drift-side-foot" data-area="footer">
+        <section class="container-raised card-shell mid">
+          <div class="card snug grid">
+            <span class="ui-label">Focus</span>
+            <div class="drift-focus grid">
+              <div>
+                <b>2h 14m</b>
+                <span class="ui-hint">today</span>
+              </div>
+              <label class="container-sunken switch pill">
+                <input type="checkbox" checked aria-label="Focus timer">
+                <span class="container-raised switch-handle tight round"></span>
+              </label>
+            </div>
+          </div>
+        </section>
+      </div>
+    </aside>
+
+    <div class="drift-main grid" data-area="main">
+
+      <div class="drift-bar grid">
+        <label class="container-sunken field grid pill">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+          <input type="search" placeholder="Search tasks and projects">
+        </label>
+        <button class="button-main icon-button square" aria-label="Filter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M7 12h10M10 18h4"/></svg></button>
+        <button class="button-main icon-button square" aria-label="New task"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg></button>
+        <span class="button-main tile grid side-l pill">
+          <span data-area="side"><i class="container-sunken avatar round tight">JR</i></span>
+          <span data-area="main"><span class="tile-title">Jules</span></span>
+        </span>
+      </div>
+
+      <div class="drift-tools grid">
+        <nav class="container-sunken tab-nav grid pill tight" role="tablist">
+          <button class="button-main tab-nav-tab quiet is-selected" role="tab" aria-selected="true">All</button>
+          <button class="button-main tab-nav-tab quiet" role="tab" aria-selected="false">Due</button>
+          <button class="button-main tab-nav-tab quiet" role="tab" aria-selected="false">Assigned</button>
+          <button class="button-main tab-nav-tab quiet" role="tab" aria-selected="false">Done</button>
+        </nav>
+        <div class="drift-softness grid">
+          <span class="ui-label">Softness</span>
+          <label class="slider">
+            <input type="range" min="50" max="200" value="100" aria-label="Softness" data-softness>
+          </label>
+        </div>
+      </div>
+
+      <div class="drift-cols grid scroll-area scroll-y">
+
+        <div class="drift-stack grid" data-area="main">
+          <section class="container-sunken card-shell mid">
+            <div class="card grid">
+              <div class="card-head grid">
+                <h1 class="ui-title">Today</h1>
+                <span class="ui-hint">Thursday, 21 August</span>
+              </div>
+              <div class="task-list grid">
+        <div class="row-quiet task-row grid">
+          <label class="checkbox">
+            <input type="checkbox">
+            <span class="container-raised checkbox-box tight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 5 5L20 7"/></svg></span>
+          </label>
+          <span>
+            <span class="task-row-title">Finish the shadow ramp spec</span>
+            <span class="task-row-note">Design system · due 4pm</span>
+          </span>
+          <span class="chip-main task-row-tag">Design</span>
+        </div>
+        <div class="row-quiet task-row grid">
+          <label class="checkbox">
+            <input type="checkbox">
+            <span class="container-raised checkbox-box tight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 5 5L20 7"/></svg></span>
+          </label>
+          <span>
+            <span class="task-row-title">Review the material presets</span>
+            <span class="task-row-note">With Priya · 30 min</span>
+          </span>
+          <span class="chip-main task-row-tag">Review</span>
+        </div>
+        <div class="row-quiet task-row grid is-done">
+          <label class="checkbox">
+            <input type="checkbox" checked>
+            <span class="container-raised checkbox-box tight is-active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 5 5L20 7"/></svg></span>
+          </label>
+          <span>
+            <span class="task-row-title">Compress the ramps for small controls</span>
+            <span class="task-row-note">Done at 11:20</span>
+          </span>
+          <span class="chip-main task-row-tag">Build</span>
+        </div>
+        <div class="row-quiet task-row grid">
+          <label class="checkbox">
+            <input type="checkbox">
+            <span class="container-raised checkbox-box tight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 5 5L20 7"/></svg></span>
+          </label>
+          <span>
+            <span class="task-row-title">Test contrast on the muted ink</span>
+            <span class="task-row-note">Accessibility · blocked</span>
+          </span>
+          <span class="chip-main task-row-tag">QA</span>
+        </div>
+        <div class="row-quiet task-row grid">
+          <label class="checkbox">
+            <input type="checkbox">
+            <span class="container-raised checkbox-box tight"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="m5 13 5 5L20 7"/></svg></span>
+          </label>
+          <span>
+            <span class="task-row-title">Write the dither note</span>
+            <span class="task-row-note">Documentation</span>
+          </span>
+          <span class="chip-main task-row-tag">Docs</span>
+        </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="container-raised card-shell mid">
+            <div class="card grid">
+              <div class="card-head grid">
+                <h2 class="ui-subtitle">This week</h2>
+                <span class="ui-hint">Tap a day</span>
+              </div>
+              <div class="day-nav grid" role="tablist">
+                <button class="button-main day-nav-day quiet square">M<small>18</small></button>
+                <button class="button-main day-nav-day quiet square">T<small>19</small></button>
+                <button class="button-main day-nav-day quiet square">W<small>20</small></button>
+                <button class="button-main day-nav-day quiet square is-active">T<small>21</small></button>
+                <button class="button-main day-nav-day quiet square">F<small>22</small></button>
+                <button class="button-main day-nav-day quiet square">S<small>23</small></button>
+                <button class="button-main day-nav-day quiet square">S<small>24</small></button>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <div class="drift-stack grid" data-area="side">
+          <section class="container-raised card-shell mid">
+            <div class="card grid">
+              <span class="ui-label">Progress</span>
+              <div class="container-sunken ring round mid" data-fill="62">
+                <span class="ring-value">
+                  <b>62<small>%</small></b>
+                  <span>complete</span>
+                </span>
+              </div>
+              <div class="drift-stats grid">
+                <div class="stat-row grid">
+                  <span class="stat-row-name">Design</span>
+                  <span class="ui-hint">8 / 12</span>
+                </div>
+                <div class="container-sunken track pill tight">
+                  <i class="track-fill" data-fill="66"></i>
+                </div>
+                <div class="stat-row grid">
+                  <span class="stat-row-name">Build</span>
+                  <span class="ui-hint">5 / 9</span>
+                </div>
+                <div class="container-sunken track pill tight">
+                  <i class="track-fill" data-fill="55"></i>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="container-sunken card-shell mid">
+            <div class="card grid">
+              <span class="ui-label">Notifications</span>
+              <div class="stat-row grid">
+                <span class="stat-row-name">Mentions</span>
+                <label class="container-sunken switch pill">
+                  <input type="checkbox" checked aria-label="Mentions">
+                  <span class="container-raised switch-handle tight round"></span>
+                </label>
+              </div>
+              <div class="stat-row grid">
+                <span class="stat-row-name">Due soon</span>
+                <label class="container-sunken switch pill">
+                  <input type="checkbox" checked aria-label="Due soon">
+                  <span class="container-raised switch-handle tight round"></span>
+                </label>
+              </div>
+              <div class="stat-row grid">
+                <span class="stat-row-name">Digest</span>
+                <label class="container-sunken switch pill">
+                  <input type="checkbox" aria-label="Digest">
+                  <span class="container-raised switch-handle tight round"></span>
+                </label>
+              </div>
+            </div>
+          </section>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="./drift.js"></script>
+</body>
+</html>

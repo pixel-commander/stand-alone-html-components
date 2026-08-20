@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>stand-alone-html-components</title>
+<link rel="stylesheet" href="__shared/css/theme.css">
+<link rel="stylesheet" href="__shared/css/grid.css">
+<link rel="stylesheet" href="__shared/css/page.css">
+<link rel="stylesheet" href="__shared/components/item-list/item-list.css">
+<script src="__shared/components/item-list/item-list.js"></script>
+</head>
+<body>
+<div class="grid holy-grail">
+  <header data-area="header"><h1>stand-alone-html-components</h1></header>
+  <item-list data-area="left" data-empty="No projects yet"></item-list>
+  <div class="grid" data-area="main">
+    <p>Select a project from the left</p>
+    <iframe title="project"></iframe>
+  </div>
+</div>
+<script>
+const PROJECTS = [
+  { name: 'image-upload', path: 'projects/image-upload/index.html' },
+  { name: 'machine-overview-grid', path: 'projects/machine-overview-grid/index.html' },
+  { name: 'machine-overview-widget', path: 'projects/machine-overview-widget/index.html' },
+  { name: 'active-alarms-table', path: 'projects/active-alarms-table/index.html' },
+  { name: 'colored-state-tiles', path: 'projects/colored-state-tiles/index.html' },
+];
+
+const LIST = document.querySelector('item-list');
+const MAIN = document.querySelector('[data-area="main"]');
+const FRAME = document.querySelector('[data-area="main"] iframe');
+
+LIST.items = PROJECTS;
+LIST.addEventListener('select', (event) => {
+  MAIN.dataset.project = event.detail.name;
+  FRAME.src = event.detail.path;
+  location.hash = event.detail.name;
+});
+
+const INITIAL = decodeURIComponent(location.hash.slice(1)) || (PROJECTS[0] && PROJECTS[0].name);
+if (INITIAL) LIST.value = INITIAL;
+</script>
+</body>
+</html>

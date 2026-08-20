@@ -1,0 +1,42 @@
+.soft-button{
+  display:grid;
+  place-items:center;
+  position:relative;
+  width:9.375rem;
+  height:9.375rem;
+  padding:0;
+  border:0;
+  background:none;
+  cursor:pointer;
+}
+.soft-button-glow{
+  position:absolute;
+  inset:0;
+  filter:blur(.4375rem);
+  transition:box-shadow var(--speed) var(--ease),transform var(--speed) var(--ease);
+}
+.soft-button-label{
+  position:relative;
+  z-index:1;
+  font-family:var(--font-alt);
+  font-size:var(--text-xl);
+  font-weight:600;
+  letter-spacing:.02em;
+  color:var(--color-text-strong);
+  user-select:none;
+}
+.soft-button:hover .soft-button-glow{
+  transform:scale(1.05);
+  box-shadow:
+    .5rem .5rem calc(1.25rem*var(--softness)) rgba(var(--shadow-rgb),calc(.5*var(--shadow-strength))),
+    -.5rem -.5rem calc(1.25rem*var(--softness)) rgba(var(--highlight-rgb),calc(.9*var(--highlight-strength))),
+    inset .5rem .5rem calc(1.25rem*var(--softness)) rgba(var(--shadow-rgb),calc(.5*var(--shadow-strength))),
+    inset -.5rem -.5rem calc(1.25rem*var(--softness)) rgba(var(--highlight-rgb),calc(.9*var(--highlight-strength)));
+}
+.soft-button:active .soft-button-glow{transform:scale(.99)}
+.soft-button.long{width:15.625rem;height:6.25rem}
+.soft-button.small{width:6.25rem;height:6.25rem}
+.soft-button.small .soft-button-label{font-size:var(--text-md)}
+.soft-button.is-disabled{cursor:not-allowed}
+.soft-button.is-disabled .soft-button-label{color:var(--color-text-faint)}
+.soft-button.is-disabled:hover .soft-button-glow{transform:none;box-shadow:none}

@@ -1,0 +1,13 @@
+.pad-recess{
+  display:grid;
+  padding:var(--padding-base);
+}
+.pad-face{
+  align-content:start;
+  padding:var(--padding-2xl);
+  gap:var(--padding-2xl);
+}
+.pad-recess.snug{padding:var(--padding-2xs)}
+.pad-recess.roomy{padding:var(--padding-md)}
+.pad-face.bare{padding:0}
+.pad-face.tall{min-height:8rem}

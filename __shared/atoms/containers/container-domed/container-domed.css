@@ -1,0 +1,39 @@
+.container-domed{
+  background-color:var(--bg-container-dark);
+  background-image:
+    radial-gradient(150% 150% at 75% 75%, rgba(var(--shadow-rgb),0) 30%, rgba(var(--shadow-rgb),calc(.5*var(--shadow-strength)))),
+    radial-gradient(150% 150% at -10% -10%, rgba(var(--highlight-rgb),0) 50%, rgba(var(--highlight-rgb),calc(.35*var(--highlight-strength))));
+  border-radius:var(--radius-md);
+  box-shadow:
+    inset -.2rem -.2rem calc(.1rem*var(--softness)) -.1rem rgba(var(--shadow-rgb),calc(.35*var(--shadow-strength))),
+    .5rem .625rem calc(.4rem*var(--softness)) -.15rem rgba(var(--shadow-block-rgb),.3),
+    .625rem .8rem calc(1rem*var(--softness)) rgba(var(--shadow-rgb),calc(.4*var(--shadow-strength))),
+    2rem 1.375rem calc(2rem*var(--softness)) .4rem rgba(var(--shadow-rgb),calc(.34*var(--shadow-strength))),
+    -.4rem -.4rem calc(.2rem*var(--softness)) -.3rem rgba(var(--highlight-rgb),calc(.75*var(--highlight-strength))),
+    -.8rem -.8rem calc(1.375rem*var(--softness)) -.3rem rgba(var(--highlight-rgb),calc(.5*var(--highlight-strength)));
+  transition:box-shadow var(--speed-slow) var(--ease),background-color var(--speed) var(--ease),filter var(--speed) var(--ease);
+}
+.container-domed.bulge{
+  background-image:
+    radial-gradient(160% 160% at 57.5% 60%, rgba(var(--highlight-rgb),0) 30%, rgba(var(--highlight-rgb),calc(.5*var(--highlight-strength))) 45%),
+    radial-gradient(180% 200% at 40% 17.5%, rgba(var(--shadow-rgb),0) 35%, rgba(var(--shadow-rgb),calc(.34*var(--shadow-strength))) 50%),
+    radial-gradient(120% 120% at 45% 45%, rgba(var(--shadow-rgb),0) 42%, rgba(var(--shadow-rgb),calc(.26*var(--shadow-strength))) 50%);
+}
+.container-domed.blurred{filter:blur(.025rem)}
+.container-domed.pill{border-radius:var(--radius-pill)}
+.container-domed.square{border-radius:var(--radius-md)}
+.container-domed.round{border-radius:var(--radius-round)}
+.container-domed.is-active{
+  background-image:
+    radial-gradient(150% 150% at 75% 75%, rgba(var(--shadow-rgb),0) 30%, rgba(var(--shadow-rgb),calc(.5*var(--shadow-strength)))),
+    radial-gradient(150% 150% at -10% -10%, rgba(var(--highlight-rgb),0) 50%, rgba(var(--highlight-rgb),calc(.35*var(--highlight-strength))));
+  box-shadow:
+    inset -.2rem -.2rem calc(.1rem*var(--softness)) -.1rem rgba(var(--shadow-rgb),calc(.4*var(--shadow-strength))),
+    .25rem .3rem calc(.3rem*var(--softness)) -.1rem rgba(var(--shadow-block-rgb),.24),
+    -.2rem -.2rem calc(.2rem*var(--softness)) -.15rem rgba(var(--highlight-rgb),calc(.6*var(--highlight-strength)));
+}
+.container-domed.is-disabled{
+  background-image:none;
+  background-color:var(--bg-container-dark);
+  box-shadow:none;
+}

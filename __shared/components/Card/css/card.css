@@ -1,0 +1,13 @@
+.card-shell{display:grid}
+.card{
+  align-content:start;
+  padding:var(--padding-4xl);
+}
+.card-head{
+  grid-template-columns:minmax(0,1fr) auto;
+  align-items:baseline;
+}
+.card.roomy{padding:var(--padding-5xl)}
+.card.snug{padding:var(--padding-2xl)}
+.card{gap:var(--padding-3xl)}
+.card-head{gap:var(--padding-lg)}

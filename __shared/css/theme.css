@@ -1,0 +1,13 @@
+:root {
+  --header-background: linear-gradient(90deg, #00365f 0%, #005ca6 48%, #1180d8 100%);
+  --header-color: #ffffff;
+  --side-background: #f4f4f4;
+  --main-background: #ffffff;
+  --border-color: #e0e0e0;
+  --text-color: #1a1a1a;
+  --muted-color: #6f7276;
+  --link-color: #005eb8;
+  --hover-background: #e8edf2;
+  --active-background: #dbe4ee;
+  --accent-color: #e8730c;
+}

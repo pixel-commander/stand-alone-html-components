@@ -1,0 +1,25 @@
+.tab-nav{
+  grid-auto-flow:column;
+  grid-auto-columns:max-content;
+  justify-self:start;
+  padding:var(--padding-xs);
+}
+.tab-nav-tab{
+  display:grid;
+  place-items:center;
+  min-height:2.25rem;
+  padding:0 var(--padding-2xl);
+  font-family:var(--font-alt);
+  font-size:var(--text-md);
+  font-weight:600;
+  letter-spacing:.02em;
+}
+.tab-nav.wide{justify-self:stretch;grid-auto-columns:minmax(0,1fr)}
+.tab-nav.wrap{
+  grid-auto-flow:row;
+  grid-auto-columns:auto;
+  grid-template-columns:repeat(auto-fill,minmax(5.5rem,auto));
+  justify-items:stretch;
+  justify-self:stretch;
+}
+.tab-nav{gap:var(--padding-xs);max-width:100%}

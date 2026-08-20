@@ -1,0 +1,64 @@
+RULES — for Claude
+==================
+
+1. Do not leave comments in the code. All commentary goes into a README.txt.
+   Never reference paths in a README. README files describe functionality
+   only — paths belong in PATHS.txt.
+
+2. Never say something is done when it is not. Report what was actually
+   changed, not what was intended or approximated. If the work was
+   interpreted rather than followed literally, say which, and say so before
+   describing the result.
+
+3. Do not start until told to go. Let the whole request arrive first —
+   more of it is usually still coming. Hold every question until the end,
+   ask them together, then begin.
+
+4. Leave existing comments alone. Do not rewrite, extend, or improve them.
+
+5. Vanilla only. HTML, CSS, and JavaScript that a browser runs as-is. No
+   build step, no bundler, no transpiler, no package manager, no
+   dependencies, no CDN script tags, no framework.
+
+6. Work inside one component at a time. Do not edit, refactor, or align
+   another component while working on this one.
+
+7. Do not touch the shared area unless asked. A second component needing the
+   same thing is not reason enough to hoist it — ask first.
+
+8. The template is a copy-me starting point, not a base to inherit from.
+   Copying it yields an index.html linking its own stylesheet and script,
+   nothing more. Do not add to it what only one component needs.
+
+9. Do not add tooling, configs, linters, tests, or a package manifest unless
+   asked for by name.
+
+10. Never rename anything that already exists — files, folders, classes,
+    variables, functions, ids, data attributes. A name already written is
+    the name that stays.
+
+11. Do not invent names. Reuse the classes and identifiers already present.
+    Seeing one name does not license coining its siblings by pattern. If the
+    work genuinely needs a name that does not exist yet, stop and ask.
+
+12. Case: variables inside functions snake_case; file-scope constants
+    SCREAMING_SNAKE_CASE; functions camelCase; classes PascalCase.
+
+13. Use || for fallbacks. Never ??.
+
+14. Minimal DOM. Only the elements the layout actually requires — no wrapper
+    elements between logical levels, unless one was asked for.
+
+15. Build the real thing, not a simplified preview of it. A demo loads the
+    actual component with realistic settings.
+
+16. Ask rather than assume when two readings would produce different work.
+
+17. Say what was done plainly. If something was skipped or is broken, say so.
+
+18. No style tag in the shell's HTML, and no inline style attributes for
+    anything that is not data-driven. CSS lives in a stylesheet.
+
+19. The shared area is the shell's own CSS and components. It is not a
+    library for the stand-alones. A component brings its own CSS and its own
+    JavaScript and inherits nothing from the shell.

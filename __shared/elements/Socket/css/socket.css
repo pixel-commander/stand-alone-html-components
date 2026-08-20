@@ -1,0 +1,30 @@
+.socket{
+  display:grid;
+  place-items:center;
+  width:12.5rem;
+  height:12.5rem;
+  padding:var(--padding-2xl);
+}
+.socket-cup{
+  display:grid;
+  place-items:center;
+  width:70%;
+  height:70%;
+}
+.socket-face{
+  display:grid;
+  place-items:center;
+  width:50%;
+  height:50%;
+}
+.socket.small{width:7rem;height:7rem;padding:var(--padding-md)}
+.socket.large{width:18rem;height:18rem;padding:var(--padding-4xl)}
+.socket.flat{width:auto;height:auto;min-height:5rem}
+.socket.flat .socket-cup{width:calc(100% - var(--padding-2xl));height:auto;min-height:3rem}
+.socket-label{
+  font-family:var(--font-alt);
+  font-size:var(--text-md);
+  font-weight:600;
+  letter-spacing:.02em;
+  color:var(--color-muted);
+}

@@ -1,0 +1,13 @@
+.raised{
+  display:grid;
+  padding:var(--padding-base);
+}
+.raised-inner{
+  align-content:start;
+  padding:var(--padding-2xl);
+  gap:var(--padding-2xl);
+}
+.raised.snug{padding:var(--padding-2xs)}
+.raised.roomy{padding:var(--padding-md)}
+.raised-inner.bare{padding:0}
+.raised-inner.tall{min-height:8rem}

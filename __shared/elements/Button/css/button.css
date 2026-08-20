@@ -1,0 +1,12 @@
+.button{
+  display:grid;
+  place-items:center;
+  min-height:3.25rem;
+  padding:0 var(--padding-4xl);
+  font-family:var(--font-alt);
+  font-size:var(--text-lg);
+  font-weight:600;
+  letter-spacing:.01em;
+}
+.button.small{min-height:2.375rem;padding:0 var(--padding-2xl);font-size:var(--text-md)}
+.button.wide{width:100%}

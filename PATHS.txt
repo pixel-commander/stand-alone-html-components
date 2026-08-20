@@ -1,0 +1,60 @@
+PATHS
+=====
+
+[root] is the only fixed path. Every other path is written relative to
+[root], or relative to the file doing the referencing.
+
+    [root] = c:\stand-alone-html-components
+
+
+Files and folders
+-----------------
+
+    [root]/index.html                       the loader shell
+    [root]/README.txt
+    [root]/RULES.txt
+    [root]/PATHS.txt
+
+    [root]/__shared/                        the shell's own assets
+    [root]/__shared/css/theme.css           colors
+    [root]/__shared/css/grid.css            layout
+    [root]/__shared/css/page.css            the shell's chrome
+    [root]/__shared/js/
+    [root]/__shared/components/<name>/      a shared component, css and js
+    [root]/__shared/__template/             starting point for a new project
+    [root]/__shared/__template/index.html
+    [root]/__shared/__template/css/style.css
+    [root]/__shared/__template/js/script.js
+
+    [root]/projects/
+    [root]/projects/<name>/                 one component
+    [root]/projects/<name>/index.html       what the loader puts in the iframe
+
+
+From the loader
+---------------
+
+The loader sits at [root], one level above the shared area:
+
+    __shared/css/theme.css
+    __shared/css/grid.css
+    __shared/css/page.css
+    __shared/components/item-list/item-list.css
+    __shared/components/item-list/item-list.js
+
+Each entry in its list carries a path, and that path is what the iframe
+loads:
+
+    projects/<name>/index.html
+
+
+From inside a project
+---------------------
+
+A project brings its own css and its own js. It does not inherit anything
+from the shared area, and nothing there is meant for it.
+
+Paths within a project are relative to the project folder itself:
+
+    css/style.css
+    js/script.js

@@ -1,0 +1,19 @@
+.container-main{
+  background:var(--bg-container-main);
+  border-radius:var(--radius-md);
+  transition:background var(--speed) var(--ease),box-shadow var(--speed-slow) var(--ease);
+}
+.container-main.alt{background:var(--bg-container-light)}
+.container-main.deep{background:var(--bg-container-deep)}
+.container-main.hard{background:var(--bg-container-hard)}
+.container-main.bordered{border:var(--border)}
+.container-main.pill{border-radius:var(--radius-pill)}
+.container-main.round{border-radius:var(--radius-round)}
+.container-main.quiet{background:transparent}
+.container-main.quiet:hover{background:var(--bg-container-main);box-shadow:
+    .0625rem .0625rem calc(.125rem*var(--softness)) rgba(var(--shadow-rgb),calc(.06*var(--shadow-strength))),
+    .125rem .125rem calc(.375rem*var(--softness)) rgba(var(--shadow-rgb),calc(.05*var(--shadow-strength))),
+    .25rem .25rem calc(.6875rem*var(--softness)) rgba(var(--shadow-rgb),calc(.035*var(--shadow-strength))),
+    -.0625rem -.0625rem calc(.125rem*var(--softness)) rgba(var(--highlight-rgb),calc(.9*var(--highlight-strength))),
+    -.125rem -.125rem calc(.375rem*var(--softness)) rgba(var(--highlight-rgb),calc(.6*var(--highlight-strength))),
+    -.3125rem -.3125rem calc(.75rem*var(--softness)) rgba(var(--highlight-rgb),calc(.32*var(--highlight-strength)))}

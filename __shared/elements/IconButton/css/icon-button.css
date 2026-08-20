@@ -1,0 +1,13 @@
+.icon-button{
+  display:grid;
+  place-items:center;
+  width:3.125rem;
+  height:3.125rem;
+  padding:0;
+  color:var(--color-muted);
+}
+.icon-button svg{width:1.0625rem;height:1.0625rem}
+.icon-button.small{width:2.375rem;height:2.375rem}
+.icon-button.small svg{width:.875rem;height:.875rem}
+.icon-button.large{width:3.75rem;height:3.75rem}
+.icon-button.large svg{width:1.25rem;height:1.25rem}

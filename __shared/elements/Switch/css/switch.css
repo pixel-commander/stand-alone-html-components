@@ -1,0 +1,17 @@
+.switch{
+  display:grid;
+  width:3.25rem;
+  height:1.875rem;
+  padding:var(--padding-xs);
+  cursor:pointer;
+}
+.switch input{position:absolute;opacity:0;width:0;height:0}
+.switch-handle{
+  width:1.375rem;
+  height:1.375rem;
+  transition:transform var(--speed) var(--ease),background var(--speed) var(--ease);
+}
+.switch input:checked ~ .switch-handle{transform:translateX(1.375rem)}
+.switch.large{width:4.125rem;height:2.25rem}
+.switch.large .switch-handle{width:1.625rem;height:1.625rem}
+.switch.large input:checked ~ .switch-handle{transform:translateX(1.875rem)}

@@ -1,0 +1,42 @@
+.chip-main{
+  background:var(--bg-container-main);
+  color:var(--color-muted);
+  border-radius:var(--radius-pill);
+  box-shadow:
+    .0625rem .0625rem calc(.125rem*var(--softness)) rgba(var(--shadow-rgb),calc(.06*var(--shadow-strength))),
+    .125rem .125rem calc(.375rem*var(--softness)) rgba(var(--shadow-rgb),calc(.05*var(--shadow-strength))),
+    .25rem .25rem calc(.6875rem*var(--softness)) rgba(var(--shadow-rgb),calc(.035*var(--shadow-strength))),
+    -.0625rem -.0625rem calc(.125rem*var(--softness)) rgba(var(--highlight-rgb),calc(.9*var(--highlight-strength))),
+    -.125rem -.125rem calc(.375rem*var(--softness)) rgba(var(--highlight-rgb),calc(.6*var(--highlight-strength))),
+    -.3125rem -.3125rem calc(.75rem*var(--softness)) rgba(var(--highlight-rgb),calc(.32*var(--highlight-strength)));
+  transition:box-shadow var(--speed) var(--ease),color var(--speed-fast) var(--ease),background var(--speed) var(--ease);
+}
+.chip-main.accent{
+  background:transparent;
+  color:var(--color-primary-darker);
+  box-shadow:
+    inset .0625rem .0625rem calc(.125rem*var(--softness)) rgba(var(--shadow-rgb),calc(.07*var(--shadow-strength))),
+    inset .125rem .125rem calc(.375rem*var(--softness)) rgba(var(--shadow-rgb),calc(.055*var(--shadow-strength))),
+    inset .25rem .25rem calc(.6875rem*var(--softness)) rgba(var(--shadow-rgb),calc(.035*var(--shadow-strength))),
+    inset -.0625rem -.0625rem calc(.125rem*var(--softness)) rgba(var(--highlight-rgb),calc(.85*var(--highlight-strength))),
+    inset -.125rem -.125rem calc(.375rem*var(--softness)) rgba(var(--highlight-rgb),calc(.55*var(--highlight-strength))),
+    inset -.3125rem -.3125rem calc(.75rem*var(--softness)) rgba(var(--highlight-rgb),calc(.28*var(--highlight-strength)));
+}
+.chip-main.sunken{
+  box-shadow:
+    inset .0625rem .0625rem calc(.125rem*var(--softness)) rgba(var(--shadow-rgb),calc(.07*var(--shadow-strength))),
+    inset .125rem .125rem calc(.375rem*var(--softness)) rgba(var(--shadow-rgb),calc(.055*var(--shadow-strength))),
+    inset .25rem .25rem calc(.6875rem*var(--softness)) rgba(var(--shadow-rgb),calc(.035*var(--shadow-strength))),
+    inset -.0625rem -.0625rem calc(.125rem*var(--softness)) rgba(var(--highlight-rgb),calc(.85*var(--highlight-strength))),
+    inset -.125rem -.125rem calc(.375rem*var(--softness)) rgba(var(--highlight-rgb),calc(.55*var(--highlight-strength))),
+    inset -.3125rem -.3125rem calc(.75rem*var(--softness)) rgba(var(--highlight-rgb),calc(.28*var(--highlight-strength)));
+  color:var(--color-text-dim);
+}
+.chip-main.round{border-radius:var(--radius-round)}
+.chip-main.is-selected{color:var(--color-text-strong);box-shadow:
+    inset .0625rem .0625rem calc(.125rem*var(--softness)) rgba(var(--shadow-rgb),calc(.07*var(--shadow-strength))),
+    inset .125rem .125rem calc(.375rem*var(--softness)) rgba(var(--shadow-rgb),calc(.055*var(--shadow-strength))),
+    inset .25rem .25rem calc(.6875rem*var(--softness)) rgba(var(--shadow-rgb),calc(.035*var(--shadow-strength))),
+    inset -.0625rem -.0625rem calc(.125rem*var(--softness)) rgba(var(--highlight-rgb),calc(.85*var(--highlight-strength))),
+    inset -.125rem -.125rem calc(.375rem*var(--softness)) rgba(var(--highlight-rgb),calc(.55*var(--highlight-strength))),
+    inset -.3125rem -.3125rem calc(.75rem*var(--softness)) rgba(var(--highlight-rgb),calc(.28*var(--highlight-strength)))}

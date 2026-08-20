@@ -1,0 +1,10 @@
+html, body { height: 100%; margin: 0; }
+
+body {
+  display: grid;
+  align-content: start;
+  gap: 16px;
+  padding: 16px;
+  box-sizing: border-box;
+  font: 14px/1.4 Roboto, system-ui, -apple-system, Segoe UI, sans-serif;
+}

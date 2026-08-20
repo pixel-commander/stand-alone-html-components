@@ -1,8 +1,0 @@
-.section{align-content:start}
-.section-head{
-  grid-template-columns:minmax(0,1fr) auto;
-  align-items:baseline;
-}
-.section.tight{gap:var(--padding-base)}
-.section{gap:var(--padding-lg)}
-.section-head{gap:var(--padding-lg)}

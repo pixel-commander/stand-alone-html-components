@@ -1,4 +1,4 @@
-image-upload {
+.image-upload {
   position: relative;
   display: grid;
   grid-template-rows: auto auto auto;
@@ -15,28 +15,28 @@ image-upload {
   max-height: 500px;
 }
 
-image-upload.has-image {
+.image-upload.has-image {
   grid-template-rows: auto minmax(0, 1fr) auto;
   align-content: stretch;
 }
 
-image-upload > [data-area="header"] { grid-area: header; }
-image-upload > [data-area="main"] { grid-area: main; }
-image-upload > [data-area="footer"] { grid-area: footer; }
+.image-upload > [data-area="header"] { grid-area: header; }
+.image-upload > [data-area="main"] { grid-area: main; }
+.image-upload > [data-area="footer"] { grid-area: footer; }
 
-image-upload header {
+.image-upload header {
   font-size: 15px;
   font-weight: 600;
 }
 
-image-upload img {
+.image-upload img {
   width: 100%;
   height: auto;
 }
 
-image-upload img:not([src]) { display: none; }
+.image-upload img:not([src]) { display: none; }
 
-image-upload button {
+.image-upload button {
   grid-area: main;
   position: absolute;
   top: 0;
@@ -52,10 +52,10 @@ image-upload button {
   cursor: pointer;
 }
 
-image-upload:not(.has-image) button { display: none; }
+.image-upload:not(.has-image) button { display: none; }
 
-image-upload input { display: none; }
+.image-upload input { display: none; }
 
-image-upload a {
+.image-upload a {
   color: #005eb8;
 }

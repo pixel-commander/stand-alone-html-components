@@ -1,6 +1,0 @@
-html, body { height: 100%; margin: 0; }
-
-body {
-  display: grid;
-  font: 14px/1.4 Roboto, system-ui, -apple-system, Segoe UI, sans-serif;
-}

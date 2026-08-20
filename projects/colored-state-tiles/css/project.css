@@ -1,4 +1,4 @@
-colored-state-tiles {
+.colored-state-tiles {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -8,17 +8,21 @@ colored-state-tiles {
 }
 
 colored-state-tile {
+  display: contents;
+}
+
+.colored-state-tile {
   display: grid;
   grid-template-rows: auto auto;
   width: max-content;
   text-align: center;
 }
 
-colored-state-tile .title {
+.colored-state-tile .title {
   font-weight: 600;
 }
 
-colored-state-tile .label {
+.colored-state-tile .label {
   color: #6f7276;
   font-size: 12px;
 }

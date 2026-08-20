@@ -1,3 +1,14 @@
+const UPLOAD_TEMPLATE = document.createElement('template');
+UPLOAD_TEMPLATE.innerHTML = `
+<div class="image-upload">
+  <header data-area="header"></header>
+  <img data-area="main" alt="">
+  <button type="button" aria-label="Remove image">×</button>
+  <a data-area="footer" href="#"></a>
+  <input type="file" accept="image/*">
+</div>
+`;
+
 class ImageUpload extends HTMLElement {
   #src = null;
   #handleUpload = null;
@@ -44,40 +55,23 @@ class ImageUpload extends HTMLElement {
   }
 
   render() {
-    this.classList.add('image-upload');
-    this.classList.toggle('has-image', Boolean(this.#src));
+    const upload = UPLOAD_TEMPLATE.content.cloneNode(true);
+    const wrapper = upload.querySelector('.image-upload');
 
-    const children = [];
+    wrapper.classList.toggle('has-image', Boolean(this.#src));
 
-    if (this.header) {
-      const header = document.createElement('header');
-      header.dataset.area = 'header';
-      header.textContent = this.header;
-      children.push(header);
-    }
+    const header = upload.querySelector('header');
+    if (this.header) header.textContent = this.header;
+    else header.remove();
 
-    const image = document.createElement('img');
-    image.dataset.area = 'main';
-    image.alt = '';
+    const image = upload.querySelector('img');
     if (this.#src) image.src = this.#src;
-    children.push(image);
 
-    const remove = document.createElement('button');
-    remove.type = 'button';
-    remove.textContent = '×';
-    remove.setAttribute('aria-label', 'Remove image');
-    children.push(remove);
-
-    const link = document.createElement('a');
-    link.dataset.area = 'footer';
-    link.href = '#';
+    const link = upload.querySelector('a');
     link.textContent = this.label;
-    children.push(link);
 
-    const input = document.createElement('input');
-    input.type = 'file';
-    input.accept = 'image/*';
-    children.push(input);
+    const remove = upload.querySelector('button');
+    const input = upload.querySelector('input');
 
     remove.addEventListener('click', () => {
       this.src = null;
@@ -95,7 +89,7 @@ class ImageUpload extends HTMLElement {
       if (this.#handleUpload) this.#handleUpload(file);
     });
 
-    this.replaceChildren(...children);
+    this.replaceChildren(upload);
   }
 }
 

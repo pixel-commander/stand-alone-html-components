@@ -1,0 +1,11 @@
+ship-new-project — colored-state-tiles
+
+  written    shipped/colored-state-tiles
+    colored-state-tiles.tsx
+    styles.css
+    README.txt
+  zipped     colored-state-tiles.zip
+
+  the markup carried over as it stood. what the script filled in
+  is not filled in for you — the expressions between the tags are
+  yours to write, and the demo is what to check them against

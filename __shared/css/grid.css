@@ -4,6 +4,19 @@
            <div data-area="main"> … </div>
    Class-based throughout so it works on a plain <div class="grid …">. */
 
+:root {
+  --padding-3xs:.125rem;
+  --padding-2xs:.1875rem;
+  --padding-xs:.25rem;
+  --padding-sm:.375rem;
+  --padding-base:.5rem;
+  --padding-md:.625rem;
+  --padding-lg:.75rem;
+  --padding-2xl:1rem;
+  --color-text-faint:#7c8497;
+  --a:154,165,223;
+}
+
 .grid { display: grid; }
 [data-area] { display: grid;}
 /* ── sidebar layouts ───────────────────────────────────────── */

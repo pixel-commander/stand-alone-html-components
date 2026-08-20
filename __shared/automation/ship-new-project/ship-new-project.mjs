@@ -5,6 +5,7 @@ import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
 
 const RUN = promisify(execFile);
+const REPORT = [];
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const ROOT = join(HERE, '..', '..', '..');
@@ -16,6 +17,11 @@ const COUNTING_PATTERN = /:(?:nth-child|nth-of-type|nth-last-child|first-child|l
 const TEMPLATE_PATTERN = /const\s+([A-Z_]+)\s*=\s*document\.createElement\('template'\);\s*\1\.innerHTML\s*=\s*`([\s\S]*?)`;/g;
 const FIELD_PATTERN = /^\s{2}#([A-Za-z_][A-Za-z0-9_]*)\s*=\s*([^;]+);\s*$/gm;
 const BUILT_PATTERN = /document\.createElement\('(?!template')([a-z]+)'/g;
+
+function say(text) {
+  REPORT.push(text);
+  console.log(text);
+}
 
 function toPascalCase(name) {
   return name.split('-').map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join('');
@@ -226,12 +232,12 @@ async function zip(destination, project_name) {
 
 function report(title, entries) {
   if (!entries.length) return;
-  console.log('  ' + title);
+  say('  ' + title);
   entries.forEach((entry) => {
-    console.log('    ' + entry.what + ' — ' + entry.detail);
-    console.log('      ' + entry.fix);
+    say('    ' + entry.what + ' — ' + entry.detail);
+    say('      ' + entry.fix);
   });
-  console.log('');
+  say('');
 }
 
 async function run() {
@@ -263,15 +269,15 @@ async function run() {
   const templates = readTemplates(source);
   const { blockers, decisions } = auditProject(project_name, source, css, templates);
 
-  console.log('ship-new-project — ' + project_name);
-  console.log('');
+  say('ship-new-project — ' + project_name);
+  say('');
 
   if (blockers.length) {
     report('blocked', blockers);
-    console.log('  nothing was written');
-    console.log('');
-    console.log('  these are the parts of the conversion a script cannot do for you.');
-    console.log('  fix them in the project, then run this again');
+    say('  nothing was written');
+    say('');
+    say('  these are the parts of the conversion a script cannot do for you.');
+    say('  fix them in the project, then run this again');
     process.exit(1);
   }
 
@@ -282,16 +288,18 @@ async function run() {
   const carried = await copyShipped(project_name, destination, component_source);
   await zip(destination, project_name);
 
-  console.log('  written    shipped/' + project_name);
-  carried.forEach((name) => console.log('    ' + name));
-  console.log('  zipped     ' + project_name + '.zip');
-  console.log('');
+  say('  written    shipped/' + project_name);
+  carried.forEach((name) => say('    ' + name));
+  say('  zipped     ' + project_name + '.zip');
+  say('');
 
   report('decisions left to you', decisions);
 
-  console.log('  the markup carried over as it stood. what the script filled in');
-  console.log('  is not filled in for you — the expressions between the tags are');
-  console.log('  yours to write, and the demo is what to check them against');
+  say('  the markup carried over as it stood. what the script filled in');
+  say('  is not filled in for you — the expressions between the tags are');
+  say('  yours to write, and the demo is what to check them against');
+
+  await writeFile(join(destination, 'LOSSES.txt'), REPORT.join('\n') + '\n');
 }
 
 run().catch((error) => {

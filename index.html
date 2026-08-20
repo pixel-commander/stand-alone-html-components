@@ -14,10 +14,14 @@
 <div class="grid holy-grail">
   <header data-area="header"><h1>stand-alone-html-components</h1></header>
   <item-list data-area="left" data-empty="No projects yet"></item-list>
-  <div class="grid" data-area="main">
-    <p>Select a project from the left</p>
+  <div class="grid with-footer" data-area="main">
+    <div data-area="main"><p>Select a project from the left</p>
     <iframe title="project"></iframe>
   </div>
+  <footer data-area="footer" class="grid side-r">
+    <div data-area="side"><button type="button">ship</button></div>
+  </footer>
+  
 </div>
 <script>
 const PROJECTS = [
@@ -40,6 +44,15 @@ LIST.addEventListener('select', (event) => {
 
 const INITIAL = decodeURIComponent(location.hash.slice(1)) || (PROJECTS[0] && PROJECTS[0].name);
 if (INITIAL) LIST.value = INITIAL;
+
+const SHIP = document.querySelector('[data-area="side"]');
+SHIP.addEventListener('click', async () => {
+  const project = MAIN.dataset.project;
+  if (!project) return;
+
+  const answer = await fetch('/ship?name=' + encodeURIComponent(project));
+  console.log(await answer.text());
+});
 </script>
 </body>
 </html>

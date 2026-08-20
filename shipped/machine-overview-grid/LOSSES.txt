@@ -1,0 +1,13 @@
+ship-new-project — machine-overview-grid
+
+  written    shipped/machine-overview-grid
+    machine-overview-grid.tsx
+    styles.css
+    README.txt
+    icons/recipe.svg
+    icons/snowflake.svg
+  zipped     machine-overview-grid.zip
+
+  the markup carried over as it stood. what the script filled in
+  is not filled in for you — the expressions between the tags are
+  yours to write, and the demo is what to check them against

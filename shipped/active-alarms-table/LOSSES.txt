@@ -1,0 +1,16 @@
+ship-new-project — active-alarms-table
+
+  written    shipped/active-alarms-table
+    active-alarms-table.tsx
+    styles.css
+    README.txt
+    icons/bell.svg
+  zipped     active-alarms-table.zip
+
+  decisions left to you
+    asset path — icons/bell.svg
+      this was relative to the project folder and is relative to nothing once the component moves
+
+  the markup carried over as it stood. what the script filled in
+  is not filled in for you — the expressions between the tags are
+  yours to write, and the demo is what to check them against

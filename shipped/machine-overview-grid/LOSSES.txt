@@ -2,6 +2,7 @@ ship-new-project — machine-overview-grid
 
   written    shipped/machine-overview-grid
     machine-overview-grid.tsx
+    machine-overview-grid.stories.tsx
     styles.css
     README.txt
     icons/recipe.svg

@@ -20,6 +20,7 @@ Files and folders
     [root]/__shared/css/grid.css            layout
     [root]/__shared/css/page.css            the shell's chrome
     [root]/__shared/components/<name>/      a shared component, css and js
+    [root]/__shared/js/useContainerSize.js  a container's width and height, observed
 
     [root]/__shared/__template/             starting point for a new project
     [root]/__shared/__template/README.txt   the stamp
@@ -29,11 +30,19 @@ Files and folders
     [root]/__shared/__template/js/component.js
     [root]/__shared/__template/js/script.js
 
+    [root]/__shared/__templates/react-component/
+                                            the shape a component ships in
+    [root]/__shared/__templates/react-component/README.txt
+    [root]/__shared/__templates/react-component/component-name.tsx
+    [root]/__shared/__templates/react-component/component-name.stories.tsx
+
     [root]/__shared/automation/             the scripts that run the stamp
     [root]/__shared/automation/add-new-project/add-new-project.mjs
     [root]/__shared/automation/add-new-project/README.txt
     [root]/__shared/automation/ship-new-project/ship-new-project.mjs
     [root]/__shared/automation/ship-new-project/README.txt
+    [root]/__shared/automation/install-new-component/install-new-component.mjs
+    [root]/__shared/automation/install-new-component/README.txt
     [root]/__shared/automation/serve-the-shell/serve-the-shell.mjs
     [root]/__shared/automation/serve-the-shell/README.txt
 
@@ -79,6 +88,14 @@ Paths within a project are relative to the project folder itself:
     js/<name>.js
     js/script.js
 
+A project that carries a second script keeps it beside the rest:
+
+    js/generatePieChart.js             the slices a chart is drawn from
+
+A project that reaches the shared area does it from two levels down:
+
+    ../../__shared/js/useContainerSize.js
+
 A project that carries assets keeps them beside the rest:
 
     icons/<name>.svg
@@ -87,11 +104,12 @@ A project that carries assets keeps them beside the rest:
 From the automation
 -------------------
 
-All three sit two levels inside the shared area and reach [root] from
+All four sit two levels inside the shared area and reach [root] from
 there. They are run from anywhere, by path:
 
     node __shared/automation/add-new-project/add-new-project.mjs <name>
     node __shared/automation/ship-new-project/ship-new-project.mjs <name>
+    node __shared/automation/install-new-component/install-new-component.mjs <name> <repo>
     node __shared/automation/serve-the-shell/serve-the-shell.mjs
 
 add-new-project reads the template and writes a project:
@@ -100,14 +118,32 @@ add-new-project reads the template and writes a project:
     projects/<name>/                   written
     index.html                         the array in the shell, appended to
 
-ship-new-project reads a project and writes a shipped folder:
+ship-new-project reads a project and a template, and writes a shipped
+folder:
 
+    __shared/__templates/react-component/component-name.tsx
+                                       read
+    __shared/__templates/react-component/component-name.stories.tsx
+                                       read
     projects/<name>/js/<name>.js       read
     projects/<name>/css/project.css    read
     projects/<name>/README.txt         read when there is one
     projects/<name>/icons/             read when there is one
     shipped/<name>/                    written
     shipped/<name>/LOSSES.txt          written last, after the zip
+
+
+install-new-component reads a package and writes into a repo that is not
+this one. The repo is given on the command line, and [repo] is whatever was
+passed:
+
+    shipped/<name>/<name>.zip          read
+    [repo]/nx.json                     read, to check it is a workspace
+    [repo]/libs/cds/react/ui/<name>/   written by the repo's own generator
+    [repo]/libs/cds/react/ui/<name>/src/lib/
+                                       where the package is unpacked
+    [repo]/libs/cds/react/ui/<name>/README.txt
+                                       the project README, moved up
 
 
 From inside a shipped folder
@@ -117,6 +153,7 @@ A shipped component is unpacked into a components folder somewhere else, so
 everything it names is relative to itself:
 
     <name>.tsx
+    <name>.stories.tsx
     styles.css
     README.txt
     icons/<name>.svg

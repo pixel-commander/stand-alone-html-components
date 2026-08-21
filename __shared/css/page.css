@@ -34,10 +34,9 @@ body {
 [data-area="main"] {
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
-  place-items: center;
+ 
   background: var(--main-background);
-  align-items: center;
-  justify-content: center;
+ 
 }
 
 [data-area="main"] p {
@@ -51,5 +50,5 @@ body {
   border: 0;
 }
 
-[data-area="main"]:not([data-project]) iframe { display: none; }
+[data-area="main"].grid:not([data-project]) iframe { display: none; }
 [data-area="main"][data-project] p { display: none; }

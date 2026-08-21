@@ -1,0 +1,65 @@
+.chart-container {
+  display: grid;
+  position: relative;
+  container-type: inline-size;
+  min-width: 0;
+  min-height: 0;
+}
+
+.pie-chart-container {
+  width: 100%;
+  height: 100%;
+ 
+}
+
+.chart {
+  width: 100%;
+  height: 100%;
+}
+
+.pie-slice.is-not-selected:not(:hover) {
+  fill: #c9ccd1;
+}
+
+.pie-slice {
+  cursor: pointer;
+  transition: all 160ms ease;
+}
+
+.values[hidden] {
+  display: none;
+}
+
+.values {
+  grid-column: 1;
+  grid-row: 1;
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-areas:
+    "title"
+    "value"
+    "label";
+  grid-template-rows: auto auto auto;
+  place-content: center;
+  width: 30cqw;
+  margin: 0 auto;
+  text-align: center;
+  pointer-events: none;
+}
+
+.pie-inner-title {
+  grid-area: title;
+  font-size: 6cqw;
+}
+
+.pie-inner-value {
+  grid-area: value;
+  font-size: 15cqw;
+  font-weight: 600;
+}
+
+.pie-inner-label {
+  grid-area: label;
+  font-size: 5.75cqw;
+}

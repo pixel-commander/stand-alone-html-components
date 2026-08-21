@@ -2,6 +2,7 @@ ship-new-project — colored-state-tiles
 
   written    shipped/colored-state-tiles
     colored-state-tiles.tsx
+    colored-state-tiles.stories.tsx
     styles.css
     README.txt
   zipped     colored-state-tiles.zip

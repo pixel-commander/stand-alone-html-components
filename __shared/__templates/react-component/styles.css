@@ -1,0 +1,18 @@
+.component-name {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  overflow: auto;
+}
+
+.component-name [data-item] {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 8px;
+}
+
+.component-name [data-label='id'] {
+  flex: 0 0 auto;
+  white-space: nowrap;
+  font-weight: 600;
+}

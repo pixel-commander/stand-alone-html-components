@@ -2,6 +2,7 @@ ship-new-project — image-upload
 
   written    shipped/image-upload
     image-upload.tsx
+    image-upload.stories.tsx
     styles.css
     README.txt
   zipped     image-upload.zip

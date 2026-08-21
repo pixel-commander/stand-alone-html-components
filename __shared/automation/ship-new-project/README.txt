@@ -23,6 +23,11 @@ Carried over:
   the project README      describes the thing being shipped
   an icons folder         when the project has one
 
+A story is written beside the component, from the same reading of the
+fields. It does not run here — nothing in this repo installs Storybook — and
+it is not checked before it is written. It runs where the package is
+unpacked.
+
 Left behind:
 
   the demo script         example values, not the component's own
@@ -32,6 +37,14 @@ Left behind:
 The stylesheet is renamed to styles.css for every component, so the import
 inside the component is the same line every time and a folder holding
 several of them has no collisions.
+
+
+Where the shape comes from
+--------------------------
+The component and the story are not written by this script. It reads the
+two files in the react template, fills the holes, and writes the result. The
+shape every shipped component wears is held there and changed there, and
+this script only decides what goes in the holes.
 
 
 What blocks it

@@ -2,6 +2,7 @@ ship-new-project — active-alarms-table
 
   written    shipped/active-alarms-table
     active-alarms-table.tsx
+    active-alarms-table.stories.tsx
     styles.css
     README.txt
     icons/bell.svg

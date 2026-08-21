@@ -68,7 +68,7 @@
    what a scroller is trying to escape — three stacked widgets each want their own height, and the
    cell moves instead. (No new class: .scroll-y is the mark theme.css and drag-scroll already read.) */
 .grid.scroll-y,
-.grid.scroll { align-content: start; grid-auto-rows: max-content; }
+.grid.scroll { }
 
 /* ── gap atoms ─────────────────────────────────────────────── */
 /* the gap between cells, one step tighter than the padding ladder — a grid reads as ONE part with a

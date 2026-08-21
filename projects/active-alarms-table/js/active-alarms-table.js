@@ -1,20 +1,20 @@
 const LIST_TEMPLATE = document.createElement('template');
 LIST_TEMPLATE.innerHTML = `
-<div class="active-alarms-table">
-  <ul class="inner"></ul>
+<div class="active-alarms-table flex min-h-0">
+  <ul class="inner flex-auto list-none m-0 p-0 min-h-0 overflow-auto"></ul>
 </div>
 `;
 
 const ALARM_TEMPLATE = document.createElement('template');
 ALARM_TEMPLATE.innerHTML = `
-<li>
-  <img class="icon" alt="">
-  <div class="date"></div>
-  <a class="link" href="#"></a>
-  <div class="break"></div>
-  <div class="id"></div>
-  <div class="details"></div>
-  <div class="spacer"></div>
+<li class="flex flex-wrap gap-x-2">
+  <img class="icon flex-none block w-4 h-4" alt="">
+  <div class="date flex-auto"></div>
+  <a class="link flex-none text-[#005eb8] no-underline whitespace-nowrap" href="#"></a>
+  <div class="break basis-full h-0"></div>
+  <div class="id flex-none whitespace-nowrap font-semibold"></div>
+  <div class="details flex-auto"></div>
+  <div class="spacer basis-full my-1.5 border-b border-[#e0e0e0]"></div>
 </li>
 `;
 

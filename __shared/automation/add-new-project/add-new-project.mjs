@@ -10,11 +10,19 @@ const SHELL = join(ROOT, 'index.html');
 
 const PLACEHOLDER_TAG = 'component-name';
 const PLACEHOLDER_CLASS = 'ComponentName';
-const PLACEHOLDER_FILE = 'component.js';
 const PLACEHOLDER_TITLE = '<title>component</title>';
 
 function toPascalCase(name) {
   return name.split('-').map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join('');
+}
+
+function toKebabCase(name) {
+  return name
+    .trim()
+    .replace(/([a-z0-9])([A-Z])/g, '$1-$2')
+    .replace(/[^a-zA-Z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .toLowerCase();
 }
 
 function isValidName(name) {
@@ -44,8 +52,7 @@ async function copyTemplate(source, destination, tag_name) {
 
     if (entry.name === 'README.txt') continue;
 
-    const renamed = entry.name === PLACEHOLDER_FILE ? tag_name + '.js' : entry.name;
-    const to = join(destination, renamed);
+    const to = join(destination, entry.name);
     const body = await readFile(from, 'utf8');
     await writeFile(to, fill(body, tag_name));
   }
@@ -54,7 +61,6 @@ async function copyTemplate(source, destination, tag_name) {
 function fill(body, tag_name) {
   return body
     .split(PLACEHOLDER_TITLE).join('<title>' + tag_name + '</title>')
-    .split(PLACEHOLDER_FILE).join(tag_name + '.js')
     .split(PLACEHOLDER_CLASS).join(toPascalCase(tag_name))
     .split(PLACEHOLDER_TAG).join(tag_name);
 }
@@ -74,9 +80,10 @@ async function addToShell(tag_name) {
 }
 
 async function run() {
-  const tag_name = process.argv[2];
+  const given = process.argv[2];
+  const tag_name = given ? toKebabCase(given) : given;
 
-  if (!tag_name) {
+  if (!given) {
     console.error('add-new-project — give it a name');
     console.error('  node add-new-project.mjs <component-name>');
     process.exit(1);
@@ -106,15 +113,14 @@ async function run() {
   const listed = await addToShell(tag_name);
 
   console.log('add-new-project — ' + tag_name);
+  if (given !== tag_name) console.log('  named      "' + given + '" became ' + tag_name);
   console.log('');
   console.log('  copied     projects/' + tag_name);
-  console.log('  renamed    ' + tag_name + '.js');
   console.log('  filled     tag, class, and title');
   console.log(listed ? '  listed     added to the shell' : '  listed     already in the shell, left alone');
   console.log('');
   console.log('  still yours to do:');
-  console.log('    the markup, the props, the position classes, the stylesheets,');
-  console.log('    the demo in script.js, and the project README');
+  console.log('    the markup, the styling, and the project README');
   console.log('');
   console.log('  the stamp in the template README is the full list');
 }

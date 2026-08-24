@@ -9,6 +9,12 @@
 <link rel="stylesheet" href="__shared/css/page.css">
 <link rel="stylesheet" href="__shared/components/item-list/item-list.css">
 <script src="__shared/components/item-list/item-list.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+<script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js"></script>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+<script src="__shared/js/formatNumbers.js"></script>
 </head>
 <body>
 <div class="grid holy-grail">
@@ -16,39 +22,96 @@
   <item-list data-area="left" data-empty="No projects yet"></item-list>
   <div class="grid with-footer" data-area="main">
     <div data-area="main"><p>Select a project from the left</p>
-    <iframe title="project"></iframe>
+      <div id="root"></div>
+    </div>
+    <footer data-area="footer" class="grid side-r">
+      <div data-area="side"><button type="button">ship</button></div>
+    </footer>
   </div>
-  <footer data-area="footer" class="grid side-r">
-    <div data-area="side"><button type="button">ship</button></div>
-  </footer>
-  
 </div>
 <script>
 const PROJECTS = [
-  { name: 'image-upload', path: 'projects/image-upload/index.html' },
-  { name: 'machine-overview-grid', path: 'projects/machine-overview-grid/index.html' },
-  { name: 'active-alarms-table', path: 'projects/active-alarms-table/index.html' },
-  { name: 'colored-state-tiles', path: 'projects/colored-state-tiles/index.html' },
-  { name: 'pie-charts', path: 'projects/pie-charts/index.html' },
-  { name: 'gauge-charts', path: 'projects/gauge-charts/index.html' },
-  { name: 'line-charts', path: 'projects/line-charts/index.html' },
-  { name: 'styled-dl', path: 'projects/styled-dl/index.html' },
-  { name: 'kpi-widget', path: 'projects/kpi-widget/index.html' },
+  { name: 'image-upload', class_name: 'ImageUpload' },
+  { name: 'machine-overview-grid', class_name: 'MachineOverviewGrid' },
+  { name: 'active-alarms-table', class_name: 'ActiveAlarmsTable' },
+  { name: 'colored-state-tiles', class_name: 'ColoredStateTiles' },
+  { name: 'pie-charts', class_name: 'PieCharts' },
+  { name: 'gauge-charts', class_name: 'GaugeCharts' },
+  { name: 'line-charts', class_name: 'LineCharts' },
+  { name: 'styled-dl', class_name: 'StyledDl' },
+  { name: 'kpi-widget', class_name: 'KpiWidget' },
+  { name: 'tie-check', path: 'projects/tie-check/index.html' },
 ];
+
+const GENERATORS = {
+  'pie-charts': 'generatePieChart.js',
+  'gauge-charts': 'generateGaugeChart.js',
+  'line-charts': 'generateLineChart.js',
+};
 
 const LIST = document.querySelector('item-list');
 const MAIN = document.querySelector('[data-area="main"]');
-const FRAME = document.querySelector('[data-area="main"] iframe');
+const ROOT = document.getElementById('root');
 
-LIST.items = PROJECTS;
-LIST.addEventListener('select', (event) => {
-  MAIN.dataset.project = event.detail.name;
-  FRAME.src = event.detail.path;
-  location.hash = event.detail.name;
+const loadScript = (src) => new Promise((done, fail) => {
+  const tag = document.createElement('script');
+  tag.src = src;
+  tag.onload = done;
+  tag.onerror = () => fail(new Error('could not load ' + src));
+  document.body.append(tag);
 });
 
-const INITIAL = decodeURIComponent(location.hash.slice(1)) || (PROJECTS[0] && PROJECTS[0].name);
-if (INITIAL) LIST.value = INITIAL;
+const runBabel = async (src) => {
+  const answer = await fetch(src);
+  if (!answer.ok) throw new Error('could not load ' + src);
+
+  const source = await answer.text();
+  const compiled = Babel.transform(source, { presets: [['react', { runtime: 'classic' }], 'typescript'], filename: src }).code;
+
+  const tag = document.createElement('script');
+  tag.textContent = compiled;
+  document.body.append(tag);
+};
+
+const loadStyles = (href) => {
+  const held = document.querySelector('link[data-project]');
+  if (held) held.remove();
+
+  const tag = document.createElement('link');
+  tag.rel = 'stylesheet';
+  tag.href = href;
+  tag.dataset.project = '';
+  document.head.append(tag);
+};
+
+const show = async (project) => {
+  ROOT.replaceChildren();
+
+  const folder = 'projects/' + project.name + '/';
+  const generator = GENERATORS[project.name];
+
+  loadStyles(folder + 'styles.css');
+  if (generator) await loadScript(folder + generator);
+  await runBabel(folder + project.name + '.jsx');
+  await runBabel(folder + 'script.js');
+};
+
+LIST.items = PROJECTS.map((one) => ({ ...one, path: 'projects/' + one.name + '/index.html' }));
+
+const INITIAL = decodeURIComponent(location.hash.slice(1)) || PROJECTS[0].name;
+const CHOSEN = PROJECTS.find((one) => one.name === INITIAL) || PROJECTS[0];
+
+LIST.addEventListener('select', (event) => {
+  if (event.detail.name === MAIN.dataset.project) return;
+
+  MAIN.dataset.project = event.detail.name;
+  location.hash = event.detail.name;
+  location.reload();
+});
+
+MAIN.dataset.project = CHOSEN.name;
+LIST.value = CHOSEN.name;
+show(CHOSEN);
 
 const SHIP = document.querySelector('[data-area="side"]');
 SHIP.addEventListener('click', async () => {

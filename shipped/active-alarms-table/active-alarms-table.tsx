@@ -10,7 +10,7 @@ export type ActiveAlarmsTableProps = {
 
 export function ActiveAlarmsTable({
   data = [],
-  className,
+  className,  
   handleClick = undefined,
   Icon = 'icons/bell.svg',
   link_text = 'Open Issue',

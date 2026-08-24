@@ -1,0 +1,62 @@
+html, body { height: 100%; margin: 0; }
+
+body {
+  font: 14px/1.4 Roboto, system-ui, -apple-system, Segoe UI, sans-serif;
+  box-sizing: border-box;
+}
+
+#root {
+  height: 100%;
+}
+
+.line-rule {
+  stroke: #e6e8eb;
+  stroke-width: 1;
+}
+
+.line-series {
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.line-label {
+  fill: #5b6270;
+  font-size: 11px;
+  dominant-baseline: middle;
+}
+
+.line-label[data-side='left'] {
+  text-anchor: end;
+  transform: translateX(-6px);
+}
+
+.line-label[data-side='right'] {
+  text-anchor: start;
+  transform: translateX(6px);
+}
+
+.line-label[data-side='bottom'] {
+  text-anchor: middle;
+}
+
+.line-unit {
+  fill: #9aa1ad;
+  font-size: 9px;
+  dominant-baseline: middle;
+}
+
+.line-unit[data-side='left'] {
+  text-anchor: end;
+  transform: translateX(-6px);
+}
+
+.line-unit[data-side='right'] {
+  text-anchor: start;
+  transform: translateX(6px);
+}
+
+.line-unit[data-side='bottom'] {
+  text-anchor: middle;
+}

@@ -1,0 +1,23 @@
+html, body { height: 100%; margin: 0; }
+
+body {
+  font: 14px/1.4 Roboto, system-ui, -apple-system, Segoe UI, sans-serif;
+  box-sizing: border-box;
+}
+
+#root {
+  height: 100%;
+}
+
+.pie-slice.is-not-selected:not(:hover) {
+  fill: #c9ccd1;
+}
+
+.pie-slice {
+  cursor: pointer;
+  transition: all 160ms ease;
+}
+
+.pie-inner-title { font-size: 6cqw; }
+.pie-inner-value { font-size: 15cqw; font-weight: 600; }
+.pie-inner-label { font-size: 5.75cqw; }

@@ -11,6 +11,7 @@ const SHELL = join(ROOT, 'index.html');
 const PLACEHOLDER_TAG = 'component-name';
 const PLACEHOLDER_CLASS = 'ComponentName';
 const PLACEHOLDER_TITLE = '<title>component</title>';
+const PLACEHOLDER_FILE = 'component-name.jsx';
 
 function toPascalCase(name) {
   return name.split('-').map((part) => part.charAt(0).toUpperCase() + part.slice(1)).join('');
@@ -52,7 +53,8 @@ async function copyTemplate(source, destination, tag_name) {
 
     if (entry.name === 'README.txt') continue;
 
-    const to = join(destination, entry.name);
+    const renamed = entry.name === PLACEHOLDER_FILE ? tag_name + '.jsx' : entry.name;
+    const to = join(destination, renamed);
     const body = await readFile(from, 'utf8');
     await writeFile(to, fill(body, tag_name));
   }
@@ -60,6 +62,7 @@ async function copyTemplate(source, destination, tag_name) {
 
 function fill(body, tag_name) {
   return body
+    .split(PLACEHOLDER_FILE).join(tag_name + '.jsx')
     .split(PLACEHOLDER_TITLE).join('<title>' + tag_name + '</title>')
     .split(PLACEHOLDER_CLASS).join(toPascalCase(tag_name))
     .split(PLACEHOLDER_TAG).join(tag_name);
@@ -116,6 +119,7 @@ async function run() {
   if (given !== tag_name) console.log('  named      "' + given + '" became ' + tag_name);
   console.log('');
   console.log('  copied     projects/' + tag_name);
+  console.log('  renamed    ' + tag_name + '.jsx');
   console.log('  filled     tag, class, and title');
   console.log(listed ? '  listed     added to the shell' : '  listed     already in the shell, left alone');
   console.log('');

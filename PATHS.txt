@@ -6,7 +6,6 @@ PATHS
 
     [root] = c:\stand-alone-html-components
 
-
 Files and folders
 -----------------
 
@@ -24,11 +23,11 @@ Files and folders
 
     [root]/__shared/__template/             starting point for a new project
     [root]/__shared/__template/README.txt   the stamp
+    [root]/__shared/__template/RULES.txt    marking a project for conversion
     [root]/__shared/__template/index.html
-    [root]/__shared/__template/css/style.css
-    [root]/__shared/__template/css/project.css
-    [root]/__shared/__template/js/component.js
-    [root]/__shared/__template/js/script.js
+    [root]/__shared/__template/settings.js
+    [root]/__shared/__template/script.js
+    [root]/__shared/__template/styles.css
 
     [root]/__shared/__templates/react-component/
                                             the shape a component ships in
@@ -39,24 +38,21 @@ Files and folders
     [root]/__shared/automation/             the scripts that run the stamp
     [root]/__shared/automation/add-new-project/add-new-project.mjs
     [root]/__shared/automation/add-new-project/README.txt
-    [root]/__shared/automation/ship-new-project/ship-new-project.mjs
-    [root]/__shared/automation/ship-new-project/README.txt
     [root]/__shared/automation/install-new-component/install-new-component.mjs
     [root]/__shared/automation/install-new-component/README.txt
     [root]/__shared/automation/serve-the-shell/serve-the-shell.mjs
     [root]/__shared/automation/serve-the-shell/README.txt
+    [root]/__shared/automation/convert-to-tailwind/convert-to-tailwind.mjs
+    [root]/__shared/automation/convert-to-tailwind/README.txt
 
     [root]/__shared/docs/<name>/README.txt  a process, described
 
     [root]/projects/
     [root]/projects/<name>/                 one component
-    [root]/projects/<name>/index.html       what the loader puts in the iframe
-
-    [root]/shipped/
-    [root]/shipped/<name>/                  one component, converted
-    [root]/shipped/<name>/<name>.zip        the same folder, packed
-    [root]/shipped/<name>/LOSSES.txt        the report the shipper printed
-
+    [root]/projects/<name>/index.html       a mounting point and nothing else
+    [root]/projects/<name>/<name>.jsx       the component
+    [root]/projects/<name>/script.js        the demo that renders it
+    [root]/projects/<name>/styles.css
 
 From the loader
 ---------------
@@ -69,37 +65,35 @@ The loader sits at [root], one level above the shared area:
     __shared/components/item-list/item-list.css
     __shared/components/item-list/item-list.js
 
-Each entry in its list carries a path, and that path is what the iframe
-loads:
+The shell fetches what a component is made of and compiles it in the page:
 
-    projects/<name>/index.html
+    projects/<name>/<name>.jsx
+    projects/<name>/script.js
+    projects/<name>/styles.css
 
+A component that draws has its geometry fetched first:
+
+    projects/<name>/generate<Name>.js
 
 From inside a project
 ---------------------
 
-A project brings its own css and its own js. It does not inherit anything
-from the shared area, and nothing there is meant for it.
+A component carries no runtime of its own. React, Tailwind, the compiler and
+the plotting library are the shell's, and a component names none of them.
 
 Paths within a project are relative to the project folder itself:
 
-    css/style.css
-    css/project.css
-    js/<name>.js
-    js/script.js
+    <name>.jsx
+    script.js
+    styles.css
 
-A project that carries a second script keeps it beside the rest:
+A project that draws keeps its geometry beside the rest:
 
-    js/generatePieChart.js             the slices a chart is drawn from
-
-A project that reaches the shared area does it from two levels down:
-
-    ../../__shared/js/useContainerSize.js
+    generate<Name>.js
 
 A project that carries assets keeps them beside the rest:
 
     icons/<name>.svg
-
 
 From the automation
 -------------------
@@ -108,7 +102,6 @@ All four sit two levels inside the shared area and reach [root] from
 there. They are run from anywhere, by path:
 
     node __shared/automation/add-new-project/add-new-project.mjs <name>
-    node __shared/automation/ship-new-project/ship-new-project.mjs <name>
     node __shared/automation/install-new-component/install-new-component.mjs <name> <repo>
     node __shared/automation/serve-the-shell/serve-the-shell.mjs
 
@@ -116,47 +109,17 @@ add-new-project reads the template and writes a project:
 
     __shared/__template/               read
     projects/<name>/                   written
+    component-name.jsx                 renamed to <name>.jsx
     index.html                         the array in the shell, appended to
-
-ship-new-project reads a project and a template, and writes a shipped
-folder:
-
-    __shared/__templates/react-component/component-name.tsx
-                                       read
-    __shared/__templates/react-component/component-name.stories.tsx
-                                       read
-    projects/<name>/js/<name>.js       read
-    projects/<name>/css/project.css    read
-    projects/<name>/README.txt         read when there is one
-    projects/<name>/icons/             read when there is one
-    shipped/<name>/                    written
-    shipped/<name>/LOSSES.txt          written last, after the zip
-
 
 install-new-component reads a package and writes into a repo that is not
 this one. The repo is given on the command line, and [repo] is whatever was
 passed:
 
-    shipped/<name>/<name>.zip          read
+    projects/<name>/                   read
     [repo]/nx.json                     read, to check it is a workspace
     [repo]/libs/cds/react/ui/<name>/   written by the repo's own generator
     [repo]/libs/cds/react/ui/<name>/src/lib/
                                        where the package is unpacked
     [repo]/libs/cds/react/ui/<name>/README.txt
                                        the project README, moved up
-
-
-From inside a shipped folder
-----------------------------
-
-A shipped component is unpacked into a components folder somewhere else, so
-everything it names is relative to itself:
-
-    <name>.tsx
-    <name>.stories.tsx
-    styles.css
-    README.txt
-    icons/<name>.svg
-
-The stylesheet is named the same in every shipped folder, so the import
-inside the component is the same line every time.

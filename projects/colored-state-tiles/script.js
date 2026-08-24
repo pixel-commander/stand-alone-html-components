@@ -4,4 +4,4 @@ const DATA = [
   { title: 'Waiting to be selected', value: 1, label: 'ADF State', color: '#1565c0' },
 ];
 
-ReactDOM.createRoot(document.getElementById('root')).render(<KpiWidget data={DATA} />);
+ReactDOM.createRoot(document.getElementById('root')).render(<ColoredStateTiles data={DATA} />);

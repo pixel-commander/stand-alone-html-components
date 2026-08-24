@@ -1,0 +1,41 @@
+html, body { height: 100%; margin: 0; }
+
+body {
+  font: 14px/1.4 Roboto, system-ui, -apple-system, Segoe UI, sans-serif;
+  box-sizing: border-box;
+}
+
+#root {
+  height: 100%;
+}
+
+.gauge-track {
+  fill: #e6e8eb;
+}
+
+.gauge-band {
+  transition: d 240ms ease;
+}
+
+.gauge-tick {
+  stroke: #9aa1ad;
+  stroke-width: 2;
+}
+
+.gauge-label {
+  fill: #5b6270;
+  font-size: 3cqw;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.gauge-needle {
+  stroke: #2f3540;
+  stroke-width: 4;
+  stroke-linecap: round;
+  transition: d 240ms ease;
+}
+
+.gauge-pivot {
+  fill: #2f3540;
+}
